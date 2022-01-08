@@ -22,6 +22,7 @@ export class UserForm extends Component {
     urlcap:"",
     files:[],
     monto:"",
+    adelante:true,
     file:undefined
   };
   // Go to next step
@@ -127,6 +128,9 @@ export class UserForm extends Component {
     
   }
   subircaptura=()=>{
+    if(this.state.adelante){
+      this.setState({adelante:false})
+    
     var cuenta=0
     var pasar =0
     const handleChangeid = (input) =>  {
@@ -139,6 +143,7 @@ export class UserForm extends Component {
       });
     }
     const { step,url,firstName,lastName,email,red,igle,tipo,cedula,monto } = this.state;
+    
     if(this.state.files.length != 0){
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
@@ -147,29 +152,13 @@ export class UserForm extends Component {
 
     today = dd + '-' + mm + '-' + yyyy;
 
-    firebase.firestore().collection("koinonia-registros").where("cedula","==",cedula)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          cuenta = cuenta+1
-         });
+   
       
-         if(cuenta>0){
-          console.log("ok");
-         }else{
-         
-
-
-          pasar=1
-         }
-      
-      })
-
-      if(pasar==1){
-        var registro = firebase.firestore().collection("koinonia-registros").doc()
+    var registro = firebase.firestore().collection("koinonia-registros").doc()
     var storageRef = firebase.storage().ref("koinonia/comprobantes");
     this.setState({ id: registro.id });
     var listRef = storageRef.child(registro.id);
+    console.log('aca qui bien')
     listRef.putString(this.state.file, 'data_url').then(function(snapshot) {
     snapshot.ref.getDownloadURL().then(function(downloadURL) {
      
@@ -185,13 +174,14 @@ export class UserForm extends Component {
         cedula: cedula,
         fecha: today,
         url:downloadURL,
-        pagosurls:[downloadURL],
+        pagosurl:[downloadURL],
         verificado:0,
-        monto: monto,
+        monto: parseFloat(monto),
         pagado:0
         
     })
     .then(() => {
+      console.log('hasta qui tan bien')
       adelante()
   }).catch((error) => {
       alert("No se pudo subir su registro, porfa recargue la pagina e intentelo nuevamente")
@@ -206,10 +196,10 @@ export class UserForm extends Component {
 
      
     
-    }
 
     
     }
+  }
   }
   renderSwitch(step) {
     const { firstName, lastName, email, igle, red ,files,tipo,cedula,id,file,urlcap,monto} = this.state;

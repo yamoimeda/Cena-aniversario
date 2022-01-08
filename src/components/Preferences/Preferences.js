@@ -42,8 +42,8 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(nombre, cedula, igle, red, monto,tipo,url,uid,verificado,pagosurls) {
-  return { nombre, cedula, igle, red, monto,tipo,url,uid,verificado,pagosurls };
+function createData(nombre, cedula, igle, red, monto,tipo,url,uid,verificado,pagosurl) {
+  return { nombre, cedula, igle, red, monto,tipo,url,uid,verificado,pagosurl };
 }
 
 const styles = (theme) => ({
@@ -81,31 +81,49 @@ export class Preferences extends React.Component {
     this.state = {
       rows : [],
       open:false,
-      url:"",
+      url:['hh'],
       monto:"",
       red:"",
       total:0,
-      registrados:0
+      registrados:0,
+      completos:0,
+      media:0,
+      ninos:0
     };
   }
   
   
  componentDidMount(){
-  firebase.firestore().collection("koinonia-registros")
+  firebase.firestore().collection("koinonia-registros").orderBy("verificado")
   .get()
   .then((querySnapshot) => {
    let newdata = this.state.rows
    let total = 0
    let registrados = 0
+   let completos = 0
+   let media = 0
+   let ninos = 0
    
     querySnapshot.forEach((doc) => {
       var d = doc.data()
-     newdata.push(createData(d.nombre +" "+d.apellido, d.cedula, d.igle, d.red, d.monto,d.tipo,d.url,d.uid,d.verificado,d.pagosurls))
+     newdata.push(createData(d.nombre +" "+d.apellido, d.cedula, d.igle, d.red, d.monto,d.tipo,d.url,d.uid,d.verificado,d.pagosurl))
      total = total + parseFloat(d.monto)
      registrados = registrados+1
+     
+     if(d.tipo == 1){
+      completos = completos+1
+      console.log(d.tipo)
+     }
+     if(d.tipo == 2){
+      media = media+1
+      console.log(d.tipo)
+     }
+     if(d.tipo == 3){
+      ninos = ninos+1
+     }
       });
       
-      this.setState({rows:newdata,total:total,registrados:registrados})
+      this.setState({rows:newdata,total:total,registrados:registrados,completos:completos,media:media,ninos:ninos})
     })
 
  }
@@ -131,6 +149,17 @@ verificar = uid =>{
   newdata[index].verificado = 1
   this.setState({rows:newdata})
   alert("boleto verificado")
+})
+
+}
+
+pagado = uid =>{
+
+  firebase.firestore().collection("koinonia-registros").doc(uid).update({
+    pagado: 1
+})
+.then(() => {
+  alert("boleto Establecido como 'pagado'")
 })
 
 }
@@ -201,7 +230,7 @@ handleClose=()=>{
 }
 
 handleOpen=(url)=>{
- 
+  console.log(url);
   this.setState({open:true,url:url})
 }
   render() {
@@ -210,6 +239,8 @@ handleOpen=(url)=>{
    return(
      <div>
        <h4 className="textokoiform2">Registrados: {this.state.registrados},  Suma de montos: {this.state.total} </h4>
+       <h4 className="textokoiform2">Completos: {this.state.completos},  Media jornada: {this.state.media},  Niños: {this.state.ninos} </h4>
+       
     <TableContainer component={Paper}>
       <ImageGroup>
       <Table aria-label="customized table" >
@@ -217,7 +248,7 @@ handleOpen=(url)=>{
           <TableRow>
             <StyledTableCell align="left">Nombre</StyledTableCell>
             <StyledTableCell align="left">Cedula</StyledTableCell>
-            <StyledTableCell align="left">Igelsia</StyledTableCell>
+            <StyledTableCell align="left">Iglesia</StyledTableCell>
             <StyledTableCell align="left">Red</StyledTableCell>
             <StyledTableCell align="left">Monto</StyledTableCell>
             <StyledTableCell align="left">Boleto</StyledTableCell>
@@ -259,26 +290,33 @@ handleOpen=(url)=>{
                 
                 </StyledTableCell>
               <StyledTableCell align="left">{row.tipo == 1 ? 'Completo' :"Media jornada "}</StyledTableCell>
-              <StyledTableCell align="left">{row.verificado == 1 ? <Badge color="primary" badgeContent={"verificado"}/> : row.pagosurls.length > 1 ? <Badge color="secondary" badgeContent={"Otro pagó"}/>:<Badge color="secondary" badgeContent={"pendiente"}/>}</StyledTableCell>
-              <StyledTableCell align="right">
+              <StyledTableCell align="left">{row.verificado == 1 ? <Badge color="primary" badgeContent={"verificado"}/> :<Badge color="secondary" badgeContent={"pendiente"}/>}</StyledTableCell>
+              <StyledTableCell align="right" >
 
                       <Button
-                style={{ background: "blue", color: "#ffff",width: "40%",marginRight:5,height:"20%",fontSize:10}}
+                style={{ background: "blue", color: "#ffff",width: "30%",marginRight:5,height:"20%",fontSize:10}}
                 label="verificar"
                 onClick={()=>this.verificar(row.uid)}
               >
                 Verificar
               </Button>
               <Button
-                style={{ background: "#fa7b25", color: "#ffff",width: "40%",margin:"auto",height:"20%",fontSize:10}}
+                style={{ background: "#fa7b25", color: "#ffff",width: "30%",margin:"auto",height:"20%",fontSize:10}}
                 label="actualizar"
                 onClick={()=>this.actualizar(row.uid)}
               >
                 Actualizar
               </Button>
+              <Button
+                style={{ background: "green", color: "#ffff",width: "30%",margin:"auto",height:"20%",fontSize:10}}
+                label="actualizar"
+                onClick={()=>this.pagado(row.uid)}
+              >
+                Pagado
+              </Button>
               </StyledTableCell>
               <StyledTableCell align="right">
-              <div id={row.uid} className="foto" onClick={()=>this.handleOpen(row.pagosurls)}>
+              <div id={row.uid} className="foto" onClick={()=>this.handleOpen(row.pagosurl)}>
                    
                       <img src={row.url} alt={row.url}/>
                     
@@ -298,14 +336,19 @@ handleOpen=(url)=>{
         <DialogContent dividers>
 
           {
+            
+            this.state.url.map((ur) => {
+              return   <div className="fotomodal">
+                   
+              <img style={{height:500}} src={ur} alt={ur}/>
+            
+            </div>
+              
+            })
 
             
           }
-        <div className="fotomodal">
-                   
-                   <img style={{height:500}} src={this.state.url} alt={this.state.url}/>
-                 
-           </div>
+        
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={this.handleClose} color="primary">

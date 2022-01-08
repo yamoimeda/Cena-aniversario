@@ -99,6 +99,7 @@ componentDidMount(){
                       <option selected disabled>Tipo de Boleto</option>
                       <option value="1">Completo ($50 USD)</option>
                       <option value="2">Media jornada ($30 USD)</option>
+                      <option value="3">Niños ($30 USD incluye 2 coffee) </option>
                     </select>
         
             </div>
@@ -146,7 +147,7 @@ componentDidMount(){
                 <option value="Penonomé chigore">Penonomé Chigoré </option>
                 <option value="Penonomé los uveros">Penonomé Los Uveros</option>
                 <option value="Barraza">Barraza</option>
-                <option value="Hidekel">Pedregal</option>
+                <option value="Pedregal">Pedregal</option>
                 <option value="Arraijan">Arraiján</option>
                 <option value="Chilibre">Chilibre</option>
                 

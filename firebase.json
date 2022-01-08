@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "admin-koinoia",
     "public": "build",
     "ignore": [
       "firebase.json",

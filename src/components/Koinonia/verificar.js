@@ -54,8 +54,9 @@ export class verificar extends Component {
             <h4 className="textokoiform4">Sede: {newdata.igle}</h4>
             {newdata.igle == "Panamá" && <h4 className="textokoiform4">Red: {newdata.red}</h4> }
             
-            <h4 className="textokoiform4">Boleto: {newdata.tipo == 1 ? 'Completo' :"Media jornada "}</h4>
-                  {newdata.pagado === 0 && <Button
+            <h4 className="textokoiform4">Boleto: {newdata.tipo == 1 ? 'Completo' : newdata.tipo == 2 ? "Media jornada " : newdata.tipo == 3 ? "Niño": "Staff"}</h4>
+            {newdata.tipo === 2 && <h4 className="textokoiform4">Turno: {newdata.turno}</h4> }
+                  {/* {newdata.pagado === 0 && <Button
                 style={{background: "#fa7b25", color: "#ffff",
                   width: "40%", height:"20%"
                 }}
@@ -65,7 +66,7 @@ export class verificar extends Component {
                 {" "}
                 Pagar
               </Button>
-              }
+              } */}
         </div>
         </div>
         

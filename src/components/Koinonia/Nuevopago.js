@@ -4,9 +4,9 @@ import {
   TextField
 } from "@material-ui/core";
 import Dropzone, {useDropzone} from 'react-dropzone';
-import firebase from '../../firebase'
+import fire from '../../firebase'
 import { withRouter } from "react-router";
-
+import firebase  from 'firebase/app'
 export class Nuevopago extends Component {
   
   constructor() {
@@ -25,7 +25,8 @@ export class Nuevopago extends Component {
     file:null,
     monto:"",
     montoer:false,
-    id:undefined
+    id:undefined,
+    adelante:true
   };
 
   componentDidMount(){
@@ -59,6 +60,8 @@ export class Nuevopago extends Component {
    
 
   subircaptura = ()=>{
+    if(this.state.adelante){
+      this.setState({adelante:false})
       var monto = this.state.monto
       console.log(monto);
    const routeChange= ()=>{
@@ -71,22 +74,26 @@ export class Nuevopago extends Component {
        
         if(this.state.files.length != 0){
             
+            var date = new Date();
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
       
-            today = dd + '-' + mm + '-' + yyyy;
-          var registro = firebase.firestore().collection("koinonia-registros").doc(this.state.id)
-          var storageRef = firebase.storage().ref("koinonia/comprobantes");
+            var hoy = dd + '-' + mm + '-' + yyyy;
+            var today =hoy+today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            
+          var registro = fire.firestore().collection("koinonia-registros").doc(this.state.id)
+          var storageRef = fire.storage().ref("koinonia/comprobantes");
           this.setState({ id: registro.id });
-          var listRef = storageRef.child(registro.id);
+          var listRef = storageRef.child(registro.id+today);
           listRef.putString(this.state.file, 'data_url').then(function(snapshot) {
            snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                var u = "url"+today
-                var p = "monto"+today
+                
                registro.update({
-                pagosurls: firebase.firestore.FieldValue.arrayUnion(downloadURL)
+                pagosurl: firebase.firestore.FieldValue.arrayUnion(downloadURL),
+                actualizacion:hoy,
+                monto:firebase.firestore.FieldValue.increment(parseFloat(monto))
               
               
           }).then(()=>{
@@ -104,7 +111,7 @@ export class Nuevopago extends Component {
       
           }
     }
-
+  }
   }
 
   handleChange =event =>e=>{
@@ -124,7 +131,7 @@ export class Nuevopago extends Component {
         <section className="formpago" >
             <h3 className="textokoiform4">Comprobante de pago</h3>
             <h4 className="textokoiform4">Agregue aquí el comprobante de pago.</h4>
-            <h4 className="textokoiform4">Puede hacerlo por yappy @aposentoaltopty o por Global Bank Ministerio Evangelico El Aposento Alto cuenta corriente 01101232599.</h4>
+            <h4 className="textokoiform4">Puede hacerlo a la cuenta de Global Bank Ministerio Evangelico El Aposento Alto cuenta corriente 01101232599.</h4>
          <Dropzone  className='dropzone'   onDrop={this.onDrop}>
         {({getRootProps, getInputProps}) => (
           <section className="container">

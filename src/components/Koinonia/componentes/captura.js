@@ -66,7 +66,7 @@ export class FormPersonalDetails extends Component {
         <section className="formg" ref={this.props.refe} >
             <h3 className="textokoiform4">Comprobante de pago</h3>
             <h4 className="textokoiform4">Agregue aquí el comprobante de pago.</h4>
-            <h4 className="textokoiform4">Puede hacerlo por yappy @aposentoaltopty o por Global Bank Ministerio Evangelico El Aposento Alto cuenta corriente 01101232599.</h4>
+            <h4 className="textokoiform4">Puede hacerlo a la cuenta Global Bank Ministerio Evangelico El Aposento Alto cuenta corriente 01101232599.</h4>
          <Dropzone  className='dropzone'   onDrop={this.onDrop}>
         {({getRootProps, getInputProps}) => (
           <section className="container">

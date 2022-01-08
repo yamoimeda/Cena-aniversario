@@ -5,14 +5,9 @@ import { db } from './firebase';
 import './App.css';
 
 import { HashRouter, Route, Switch,Redirect } from 'react-router-dom';
-import Dashboard from './components/Dashboard/Dashboard';
-import Preferences from './components/Preferences/Preferences';
+import Ups from './components/Koinonia/ups'
 import Koinonia from './components/Koinonia/Koinonia';
 import Verificarqr from './components/Koinonia/verificarqr'
-import Nuevopago from './components/Koinonia/Nuevopago'
-
-
-
 function App() {
   const [books, setBooks] = useState([]);
 
@@ -45,6 +40,20 @@ function App() {
     <div className="wrapper">
     <HashRouter>
       <Switch>
+      {/* <Route exact path="/">
+        <Redirect to="/ups" />
+        </Route>
+
+        
+        <Route exact path="/ups">
+          <Ups />
+        </Route>
+
+        <Route exact path="/koinonia">
+          <Ups />
+        </Route> */}
+        
+
         <Route exact path="/">
         <Redirect to="/koinonia" />
         </Route>
@@ -56,9 +65,11 @@ function App() {
         <Route exact path="/koinonia/verificar/:id">
           <Verificarqr />
         </Route>
-        <Route exact path="/koinonia/nuevopago/:id">
+        {/* <Route exact path="/koinonia/nuevopago/:id">
           <Nuevopago />
-        </Route>
+        </Route> */}
+
+
       </Switch>
     </HashRouter>
   </div>

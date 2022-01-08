@@ -22,18 +22,12 @@ export default class Dashboard extends React.Component {
             <div className="wave-containerkoi">
             
                 <div className="logokoi">
-                <h1 className="textokoi">Koinonia 2021 está cerca, reserva tu boleto</h1>
+                <h1 className="textokoi">Koinonia 2021, vivirás una experencia sobrenatural</h1>
                 <h3 className="textokoi2">El evento que todos están esperando. Koinonia 2021 presentado por El Ministerio Evangélico El Aposento Alto. </h3>
                
 
                 <div id="containerkoi">
-                  <button className="learn-more" onClick={() => this.formularioref.current.scrollIntoView() }>
-                    <span className="circle" aria-hidden="true">
-                      <span className="icon arrow"></span>
-                    </span>
-                    <span className="button-text" id="textoliso" >RESERVAR</span>
-                    
-                  </button>
+                 
                   <button className="learn-more" onClick={() => this.verificarref.current.scrollIntoView() }>
                     
                     <span className="button-text">VERIFICAR</span>
@@ -55,7 +49,7 @@ export default class Dashboard extends React.Component {
                   <div className="inner-header flex">
                   <div className="contenido">
 
-                  <Formulario refProp={this.formularioref} />
+                  {/* <Formulario refProp={this.formularioref} /> */}
                   <Verificar refProp={this.verificarref}/>
                   </div>
                 
