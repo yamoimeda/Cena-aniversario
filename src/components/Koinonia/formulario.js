@@ -27,6 +27,7 @@ export class UserForm extends Component {
   };
   // Go to next step
   nextStep = () => {
+    console.log("hola");
     var cuenta = 0
     const pansar = ()=>{
       this.setState({
@@ -37,7 +38,7 @@ export class UserForm extends Component {
     cedula,monto } = this.state;
 
 
-    const snapshot = firebase.firestore().collection("koinonia-registros").where("cedula","==",cedula)
+    const snapshot = firebase.firestore().collection("cena-registros").where("cedula","==",cedula)
     .get();
     if(igle =="Panamá"){
       if(firstName == "" || lastName == "" || email == ""  || tipo== "" ||
@@ -45,7 +46,7 @@ export class UserForm extends Component {
        
         alert("Por favor llene todos los campos")
       }else{
-        firebase.firestore().collection("koinonia-registros").where("cedula","==",cedula)
+        firebase.firestore().collection("cena-registros").where("cedula","==",cedula)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
@@ -69,7 +70,7 @@ export class UserForm extends Component {
        
         alert("Por favor llene todos los campos")
       }else{
-        firebase.firestore().collection("koinonia-registros").where("cedula","==",cedula)
+        firebase.firestore().collection("cena-registros").where("cedula","==",cedula)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
@@ -154,8 +155,8 @@ export class UserForm extends Component {
 
    
       
-    var registro = firebase.firestore().collection("koinonia-registros").doc()
-    var storageRef = firebase.storage().ref("koinonia/comprobantes");
+    var registro = firebase.firestore().collection("cena-registros").doc()
+    var storageRef = firebase.storage().ref("cena/comprobantes");
     this.setState({ id: registro.id });
     var listRef = storageRef.child(registro.id);
     console.log('aca qui bien')
@@ -167,7 +168,7 @@ export class UserForm extends Component {
         uid: registro.id,
         nombre: firstName,
         apellido: lastName,
-        correo: email,
+        //correo: email,
         red: red,
         igle: igle,
         tipo: tipo,

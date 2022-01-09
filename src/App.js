@@ -8,6 +8,7 @@ import { HashRouter, Route, Switch,Redirect } from 'react-router-dom';
 import Ups from './components/Koinonia/ups'
 import Koinonia from './components/Koinonia/Koinonia';
 import Verificarqr from './components/Koinonia/verificarqr'
+import Nuevopago from './components/Koinonia/Nuevopago'
 function App() {
   const [books, setBooks] = useState([]);
 
@@ -55,19 +56,19 @@ function App() {
         
 
         <Route exact path="/">
-        <Redirect to="/koinonia" />
+        <Redirect to="/cena" />
         </Route>
 
         
-        <Route exact path="/koinonia">
+        <Route exact path="/cena">
           <Koinonia />
         </Route>
-        <Route exact path="/koinonia/verificar/:id">
+        <Route exact path="/cena/verificar/:id">
           <Verificarqr />
         </Route>
-        {/* <Route exact path="/koinonia/nuevopago/:id">
+         <Route exact path="/cena/nuevopago/:id">
           <Nuevopago />
-        </Route> */}
+        </Route> 
 
 
       </Switch>

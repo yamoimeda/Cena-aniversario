@@ -66,7 +66,7 @@ export class FormPersonalDetails extends Component {
             <h3 className="textokoiform">Guarda esta información</h3>
             <h3 className="textokoiform4">Captura este código</h3>
             <div>
-            <h4 className="textokoiform4">Has registrado correctamente a Koinonia 2021.</h4>
+            <h4 className="textokoiform4">Has registrado correctamente.</h4>
             <QRCode logoImage={lgmeeaa}  logoHeight={80} logoWidth={80} size={200} value={ur+"/verificar/"+values.id} />
        
             </div>
@@ -78,7 +78,7 @@ export class FormPersonalDetails extends Component {
             <h4 className="textokoiform4">Sede: {values.igle}</h4>
             {values.igle == "Panamá" && <h4 className="textokoiform4">Red: {values.red}</h4> }
             
-            <h4 className="textokoiform4">Boleto: {values.tipo == 1 ? 'Completo' :values.tipo == 2 ? "Media jornada":"Niño"}</h4>
+            <h4 className="textokoiform4">Boleto: {values.tipo == 1 ? 'Completo' :"Niño"}</h4>
             </div>
             
         

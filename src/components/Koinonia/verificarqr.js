@@ -24,7 +24,7 @@ export class verificar extends Component {
     fire.firestore().collection("Formularios").doc("EJ13sh7uPVGgZLT2KIDg").update({
       "conteo.asistencia": firebase.firestore.FieldValue.increment(1)
     })
-    fire.firestore().collection("koinonia-registros").doc(uid).update({
+    fire.firestore().collection("cena-registros").doc(uid).update({
       asistencia: 1
     })
     .then(() => {
@@ -36,7 +36,7 @@ export class verificar extends Component {
   }
 
   cofee = async uid =>{
-    fire.firestore().collection("koinonia-registros").doc(uid).update({
+    fire.firestore().collection("cena-registros").doc(uid).update({
       cofee: firebase.firestore.FieldValue.increment(-1)
   }).then(() => {
     
@@ -55,7 +55,7 @@ export class verificar extends Component {
   }
   buscar = (uid) => {
       var newdata;
-    fire.firestore().collection("koinonia-registros").where("uid","==",uid)
+    fire.firestore().collection("cena-registros").where("uid","==",uid)
     .get()
     .then((querySnapshot) => {
      
@@ -87,7 +87,7 @@ export class verificar extends Component {
             <h4 className="textokoiform4">Sede: {newdata.igle}</h4>
             {newdata.igle == "Panamá" && <h4 className="textokoiform4">Red: {newdata.red}</h4> }
             
-            <h4 className="textokoiform4">Boleto: {newdata.tipo == 1 ? 'Completo' : newdata.tipo == 2 ? "Media jornada " : newdata.tipo == 3 ? "Niño": "Staff"}</h4>
+            <h4 className="textokoiform4">Boleto: {newdata.tipo == 1 ? 'Completo' :"Niño"}</h4>
             {newdata.tipo === 2 && <h4 className="textokoiform4">Turno: {newdata.turno}</h4> }
             <h4 className="textokoiform4">Cantidad de cofee: {this.state.cofee}</h4>
         </div>

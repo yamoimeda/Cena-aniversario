@@ -3,15 +3,15 @@
 
 
 .wave-containerkoi {
-    background: #000084ff;
-    background-image: url(../static/bluemovil.png);
+    background: #00afe6;
+    background-image: url(../static/fondocena.jpeg);
     background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat;
+    background-size:cover;
     color: #FFF;
     text-align: center;
     overflow: hidden;
-    height: 100vh;
+    height: 200px;
   }
 .imagencaptura{
   height: 120px !important;
@@ -134,11 +134,11 @@
   }
 
   #textoliso{
-    color: #fa7b25 !important;
+    color: #0032b9 !important;
   }
 
   #sectionkoireserva{
-      background-color: #15035f;
+      background-color: #00afe6;
       position: relative;
       height: 225vh;
 
@@ -154,11 +154,8 @@
   .headerolas {
     position: relative;
     text-align: center;
-    background: linear-gradient(
-    #15035f 15%,
-    #fa7b25 100%
-    );
-    height: 225vh;
+    background: linear-gradient( #00afe6 15%, #0032b9 100% );
+height: 225vh;
   }
   
   .inner-header {
@@ -199,7 +196,7 @@
   .contenidoolas {
     position: relative;
     text-align: center;
-    background-color: #15035f ;
+    background-color: #00afe6 ;
     color: #FFF;
   }
   
@@ -250,7 +247,7 @@
 
   .formg{
       position: relative;
-      height: 95vh;
+      height: 700px;
   }
   .formpago{
     margin-top: 10vh;
@@ -302,9 +299,9 @@
   padding: 20px;
   border-width: 2px;
   border-radius: 2px;
-  border-color: #15035f;
+  border-color: #0032b9;
   border-style: dashed;
-  background-color: #fa7a255d;
+  background-color: #00afe6;
   color: #272727;
   outline: none;
   transition: 'border .24s ease-in-out';
@@ -358,7 +355,7 @@ select {
   top: 0;
   right: 0;
   padding: 0 1em;
-  background: #ff9900;
+  background: #0032b9;
   cursor: pointer;
   pointer-events: none;
   -webkit-transition: 0.25s all ease;
@@ -386,11 +383,11 @@ align-items: center;
 @media only screen and (min-width: 768px) {
   /* For desktop: */
   .wave-containerkoi {
-    background: #000084ff;
-    background-image: url(../static/bluebg.png);
+    background: #00afe6;
+    background-image: url(../static/fondocena.jpeg);
     background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat;
+    background-size:cover;
     color: #FFF;
     text-align: center;
     overflow: hidden;
@@ -508,7 +505,7 @@ align-items: center;
     top: 0;
     right: 0;
     padding: 0 1em;
-    background: #ff9900;
+    background: #123bf3;
     cursor: pointer;
     pointer-events: none;
     -webkit-transition: 0.25s all ease;

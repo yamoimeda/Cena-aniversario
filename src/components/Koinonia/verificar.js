@@ -22,7 +22,7 @@ export class verificar extends Component {
     html:""
   };
   routeChange (uid){
-    let path = `/koinonia/nuevopago/${uid}`;
+    let path = `/cena/nuevopago/${uid}`;
     this.props.history.push(path);
   }
   // Go to next step
@@ -31,7 +31,7 @@ export class verificar extends Component {
       
       var ur = window.location.href
       var newdata;
-    firebase.firestore().collection("koinonia-registros").where("cedula","==",cedula)
+    firebase.firestore().collection("cena-registros").where("cedula","==",cedula)
     .get()
     .then((querySnapshot) => {
      
@@ -54,19 +54,20 @@ export class verificar extends Component {
             <h4 className="textokoiform4">Sede: {newdata.igle}</h4>
             {newdata.igle == "Panamá" && <h4 className="textokoiform4">Red: {newdata.red}</h4> }
             
-            <h4 className="textokoiform4">Boleto: {newdata.tipo == 1 ? 'Completo' : newdata.tipo == 2 ? "Media jornada " : newdata.tipo == 3 ? "Niño": "Staff"}</h4>
+            <h4 className="textokoiform4">Boleto: {newdata.tipo == 1 ? 'Completo' :"Niño"}</h4>
             {newdata.tipo === 2 && <h4 className="textokoiform4">Turno: {newdata.turno}</h4> }
-                  {/* {newdata.pagado === 0 && <Button
-                style={{background: "#fa7b25", color: "#ffff",
+                  {newdata.pagado === 0 && <Button
+                style={{background: "#0032b9", color: "#ffff",
                   width: "40%", height:"20%"
                 }}
                 label="Continue"
+              
                 onClick={()=>this.routeChange(newdata.uid)}
               >
                 {" "}
                 Pagar
               </Button>
-              } */}
+              } 
         </div>
         </div>
         
@@ -109,7 +110,7 @@ export class verificar extends Component {
         />
 <div className="botonveri">
 <Button
-          style={{ background: "#fa7b25", color: "#ffff",width: "10%",margin:"auto",marginLeft:5, height:"60%"}}
+          style={{ background: "#0032b9", color: "#ffff",width: "10%",margin:"auto",marginLeft:5, height:"60%"}}
           label="bUSCAR"
           onClick={()=> this.buscar(this.state.cedula)}
         >

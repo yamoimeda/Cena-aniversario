@@ -65,7 +65,7 @@ export class Nuevopago extends Component {
       var monto = this.state.monto
       console.log(monto);
    const routeChange= ()=>{
-        let path = `/koinonia`;
+        let path = `/cena`;
         this.props.history.push(path);
       }
     if (this.state.monto == ""){
@@ -83,8 +83,8 @@ export class Nuevopago extends Component {
             var hoy = dd + '-' + mm + '-' + yyyy;
             var today =hoy+today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             
-          var registro = fire.firestore().collection("koinonia-registros").doc(this.state.id)
-          var storageRef = fire.storage().ref("koinonia/comprobantes");
+          var registro = fire.firestore().collection("cena-registros").doc(this.state.id)
+          var storageRef = fire.storage().ref("cena/comprobantes");
           this.setState({ id: registro.id });
           var listRef = storageRef.child(registro.id+today);
           listRef.putString(this.state.file, 'data_url').then(function(snapshot) {
@@ -167,7 +167,7 @@ export class Nuevopago extends Component {
           style={{ marginLeft: 5,marginBottom:0,  width: "91%"}}
         />
         <Button
-          style={{background: "#fa7b25", color: "#ffff",
+          style={{background: "#0032b9", color: "#ffff",
             width: "80%", height:"10%"
           }}
           label="Continue"

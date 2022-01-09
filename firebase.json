@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site":"cena-aniversario",
     "public": "build",
     "ignore": [
       "firebase.json",

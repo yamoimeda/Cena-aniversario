@@ -97,9 +97,9 @@ componentDidMount(){
             <div className="select">
                     <select name="slct" id="slct" required  onChange={handleChange("tipo")}>
                       <option selected disabled>Tipo de Boleto</option>
-                      <option value="1">Completo ($50 USD)</option>
-                      <option value="2">Media jornada ($30 USD)</option>
-                      <option value="3">Niños ($30 USD incluye 2 coffee) </option>
+                      <option value="1">Adulto ($50 USD)</option>
+                      <option value="2">Niños 4-10 ($35 USD)</option>
+                     {/* <option value="3">Niños ($30 USD incluye 2 coffee) </option>*/}
                     </select>
         
             </div>
@@ -107,7 +107,7 @@ componentDidMount(){
        
 
     <div style={{flex:"row"}}>
-        <TextField
+         <TextField
           error={this.state.emailer}
           label="Correo"
           onChange={handleChange("email")}
@@ -165,6 +165,7 @@ componentDidMount(){
                 <option value="San Miguelito">San Miguelito</option>
                 <option value="Circuito 8-8">Circuito 8-8</option>
                 <option value="Pueblo Nuevo">Pueblo Nuevo</option>
+                <option value="Cañitas">Cañitas</option>
               
             </select>
       
@@ -189,7 +190,7 @@ componentDidMount(){
         <br />
         <br />
         <Button
-          style={{ background: "#fa7b25", color: "#ffff",width: "90%",margin:"auto",height:"10%"}}
+          style={{ background: "#0032b9", color: "#ffff",width: "90%",margin:"auto",height:"10%"}}
           label="Siguiente"
           onClick={this.continue}
         >

@@ -21,9 +21,9 @@ export default class Dashboard extends React.Component {
 
             <div className="wave-containerkoi">
             
-                <div className="logokoi">
-                <h1 className="textokoi">Koinonia 2021, vivirás una experencia sobrenatural</h1>
-                <h3 className="textokoi2">El evento que todos están esperando. Koinonia 2021 presentado por El Ministerio Evangélico El Aposento Alto. </h3>
+                {/* <div className="logokoi">
+                <h1 className="textokoi">Aniversario 2022</h1>
+                <h3 className="textokoi2">Cena concierto por el aniversario 25 de El Ministerio Evangélico El Aposento Alto. </h3>
                
 
                 <div id="containerkoi">
@@ -36,7 +36,7 @@ export default class Dashboard extends React.Component {
                   
                 </div>
 
-                </div>
+                </div> */}
 
                 
                 
@@ -49,7 +49,7 @@ export default class Dashboard extends React.Component {
                   <div className="inner-header flex">
                   <div className="contenido">
 
-                  {/* <Formulario refProp={this.formularioref} /> */}
+                   <Formulario refProp={this.formularioref} /> 
                   <Verificar refProp={this.verificarref}/>
                   </div>
                 
